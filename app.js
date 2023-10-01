@@ -18,7 +18,7 @@ Ning = {
 				Ning.debug && console.log(`%c${e}`, "border-left: 5px solid gray;text-decoration: none;border-radius: 3px;color:#000 !important;background:write;padding: 3px")
 			},
 			logo: () => {
-				console.log("%c  _   _ _             \n | \ | (_)            \n |  \| |_ _ __   __ _ \n | . ` | | '_ \ / _` | \n | |\  | | | | | (_| |\n |_| \_|_|_| |_|\__, | \n                 __/ | \n                |___/ ", "color:white;!important;background:dodgerblue;padding: 3px;text-align: center;")
+				console.log("%c _   _ _            \n | \ | (_)            \n |  \| |_ _ __   __ _ \n | . ` | | '_ \ / _` |\n | |\  | | | | | (_| |\n |_| \_|_|_| |_|\__, | \n                 __/ |\n                |___/ ", "color:white;!important;background:dodgerblue;padding: 3px;text-align: center;")
 			}
 		},
 		plugins: {
