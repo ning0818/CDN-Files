@@ -40,7 +40,7 @@ function insertAIDiv(selector) {
       const aiExplanationDiv = document.createElement('div');
       aiExplanationDiv.className = 'lemon-explanation';
       aiExplanationDiv.innerHTML = 'AI 摘要生成中……' + '<span class="blinking-cursor"></span>';
-      aiDiv.appendChild(aiExplanationDiv); // 将 tianliGPT-explanation 插入到 aiDiv，而不是 aiTitleDiv
+      aiDiv.appendChild(aiExplanationDiv); // 将 lemonGPT-explanation 插入到 aiDiv，而不是 aiTitleDiv
 
       // 将创建的元素插入到目标元素的顶部
       targetElement.insertBefore(aiDiv, targetElement.firstChild);
@@ -56,12 +56,12 @@ function insertAIDiv(selector) {
       }
     }
 
-    var tianliGPT = {
+    var lemonGPT = {
       //读取文章中的所有文本
       getTitleAndContent: function () {
         try {
           const title = document.title;
-          const container = document.querySelector(tianliGPT_postSelector);
+          const container = document.querySelector(lemonGPT_postSelector);
           if (!container) {
             console.warn('lemonGPT：找不到文章容器。请尝试将引入的代码放入到文章容器之后。如果本身没有打算使用摘要功能可以忽略此提示。');
             return '';
@@ -82,8 +82,8 @@ function insertAIDiv(selector) {
 
           const combinedText = title + ' ' + content;
           let wordLimit = 1000;
-          if (typeof tianliGPT_wordLimit !== "undefined") {
-            wordLimit = tianliGPT_wordLimit;
+          if (typeof lemonGPT_wordLimit !== "undefined") {
+            wordLimit = lemonGPT_wordLimit;
           }
           const truncatedText = combinedText.slice(0, wordLimit);
           return truncatedText;
@@ -93,12 +93,12 @@ function insertAIDiv(selector) {
         }
       },
 
-      fetchTianliGPT: async function (content) {
-        if (!tianliGPT_key) {
-          return "没有获取到key，代码可能没有安装正确。如果你需要在lemon_gpt文件引用前定义tianliGPT_key变量。详细请查看文档。";
+      fetchlemonGPT: async function (content) {
+        if (!lemonGPT_key) {
+          return "没有获取到key，代码可能没有安装正确。如果你需要在lemon_gpt文件引用前定义lemonGPT_key变量。详细请查看文档。";
         }
 
-        if (tianliGPT_key === "5Q5mpqRK5DkwT1X9Gi5e") {
+        if (lemonGPT_key === "5Q5mpqRK5DkwT1X9Gi5e") {
           return "请购买 key 使用，如果你能看到此条内容，则说明代码安装正确。";
         }
 
@@ -114,11 +114,11 @@ function insertAIDiv(selector) {
             return data.summary;
           } else {
             if (response.status === 402) {
-              document.querySelectorAll('.post-TianliGPT').forEach(el => {
+              document.querySelectorAll('.post-lemonGPT').forEach(el => {
                 el.style.display = 'none';
               });
             }
-            throw new Error('TianliGPT：余额不足，请充值后请求新的文章');
+            throw new Error('lemonGPT：余额不足，请充值后请求新的文章');
           }
         } catch (error) {
           if (error.name === 'AbortError') {
@@ -139,15 +139,15 @@ function insertAIDiv(selector) {
 
     }
 
-    function runTianliGPT() {
-      insertAIDiv(tianliGPT_postSelector);
-      const content = tianliGPT.getTitleAndContent();
+    function runlemonGPT() {
+      insertAIDiv(lemonGPT_postSelector);
+      const content = lemonGPT.getTitleAndContent();
       if (!content && content !== '') {
-        console.log('TianliGPT本次提交的内容为：' + content);
+        console.log('lemonGPT本次提交的内容为：' + content);
       }
-      tianliGPT.fetchTianliGPT(content).then(summary => {
+      lemonGPT.fetchlemonGPT(content).then(summary => {
         const aiExplanationDiv = document.querySelector('.lemonGPT-explanation');
-        <% if (theme.plugins.tianliGPT.typewriter) { %>
+        <% if (theme.plugins.lemonGPT.typewriter) { %>
           var t = 0;
           function typeWriter() {
             if (t < summary.length) {
@@ -165,8 +165,8 @@ function insertAIDiv(selector) {
     }
 
     function checkURLAndRun() {
-      if (typeof tianliGPT_postURL === "undefined") {
-        runTianliGPT(); // 如果没有设置自定义 URL，则直接执行 runTianliGPT() 函数
+      if (typeof lemonGPT_postURL === "undefined") {
+        runlemonGPT(); // 如果没有设置自定义 URL，则直接执行 runlemonGPT() 函数
         return;
       }
 
@@ -179,16 +179,16 @@ function insertAIDiv(selector) {
           return s.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
         };
 
-        const urlPattern = wildcardToRegExp(tianliGPT_postURL);
+        const urlPattern = wildcardToRegExp(lemonGPT_postURL);
         const currentURL = window.location.href;
 
         if (urlPattern.test(currentURL)) {
-          runTianliGPT(); // 如果当前 URL 符合用户设置的 URL，则执行 runTianliGPT() 函数
+          runlemonGPT(); // 如果当前 URL 符合用户设置的 URL，则执行 runlemonGPT() 函数
         } else {
-          console.log("TianliGPT：因为不符合自定义的链接规则，我决定不执行摘要功能。");
+          console.log("lemonGPT：因为不符合自定义的链接规则，我决定不执行摘要功能。");
         }
       } catch (error) {
-        console.error("TianliGPT：我没有看懂你编写的自定义链接规则，所以我决定不执行摘要功能", error);
+        console.error("lemonGPT：我没有看懂你编写的自定义链接规则，所以我决定不执行摘要功能", error);
       }
     }
     checkURLAndRun();
