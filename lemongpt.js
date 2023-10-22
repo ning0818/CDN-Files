@@ -1,5 +1,7 @@
-    function insertAIDiv(selector) {
-      // 首先移除现有的 "post-TianliGPT" 类元素（如果有的话）
+console.log("\n %c lemonGPT 免费博客文章摘要AI生成工具 %c https://ning0818.top/posts/10458.html  \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0;")
+    
+function insertAIDiv(selector) {
+      // 首先移除现有的 "post-lemonGPT" 类元素（如果有的话）
       removeExistingAIDiv();
 
       // 获取目标元素
@@ -45,8 +47,8 @@
     }
 
     function removeExistingAIDiv() {
-      // 查找具有 "post-TianliGPT" 类的元素
-      const existingAIDiv = document.querySelector(".post-TianliGPT");
+      // 查找具有 "post-lemonGPT" 类的元素
+      const existingAIDiv = document.querySelector(".post-lemonGPT");
 
       // 如果找到了这个元素，就从其父元素中删除它
       if (existingAIDiv) {
@@ -93,7 +95,7 @@
 
       fetchTianliGPT: async function (content) {
         if (!tianliGPT_key) {
-          return "没有获取到key，代码可能没有安装正确。如果你需要在tianli_gpt文件引用前定义tianliGPT_key变量。详细请查看文档。";
+          return "没有获取到key，代码可能没有安装正确。如果你需要在lemon_gpt文件引用前定义tianliGPT_key变量。详细请查看文档。";
         }
 
         if (tianliGPT_key === "5Q5mpqRK5DkwT1X9Gi5e") {
