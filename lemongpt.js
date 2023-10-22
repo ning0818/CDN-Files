@@ -146,7 +146,7 @@ function insertAIDiv(selector) {
         console.log('TianliGPT本次提交的内容为：' + content);
       }
       tianliGPT.fetchTianliGPT(content).then(summary => {
-        const aiExplanationDiv = document.querySelector('.tianliGPT-explanation');
+        const aiExplanationDiv = document.querySelector('.lemonGPT-explanation');
         <% if (theme.plugins.tianliGPT.typewriter) { %>
           var t = 0;
           function typeWriter() {
