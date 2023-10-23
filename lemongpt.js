@@ -4,7 +4,7 @@ function tianliGPT(usePjax) {
   var tianliGPTIsRunning = false;
 
   function insertAIDiv(selector) {
-    // 首先移除现有的 "post-lemonGPT" 类元素（如果有的话）
+    // 首先移除现有的 "post-TianliGPT" 类元素（如果有的话）
     removeExistingAIDiv();
 
     // 获取目标元素
@@ -17,14 +17,14 @@ function tianliGPT(usePjax) {
 
     // 创建要插入的HTML元素
     const aiDiv = document.createElement('div');
-    aiDiv.className = 'post-lemonGPT';
+    aiDiv.className = 'post-TianliGPT';
 
     const aiTitleDiv = document.createElement('div');
-    aiTitleDiv.className = 'lemonGPT-title';
+    aiTitleDiv.className = 'tianliGPT-title';
     aiDiv.appendChild(aiTitleDiv);
 
     const aiIcon = document.createElement('i');
-    aiIcon.className = 'lemonGPT-title-icon';
+    aiIcon.className = 'tianliGPT-title-icon';
     aiTitleDiv.appendChild(aiIcon);
 
     // 插入 SVG 图标
@@ -36,28 +36,28 @@ function tianliGPT(usePjax) {
     </svg>`;
 
     const aiTitleTextDiv = document.createElement('div');
-    aiTitleTextDiv.className = 'lemonGPT-title-text';
+    aiTitleTextDiv.className = 'tianliGPT-title-text';
     aiTitleTextDiv.textContent = 'AI摘要';
     aiTitleDiv.appendChild(aiTitleTextDiv);
 
     const aiTagDiv = document.createElement('div');
-    aiTagDiv.className = 'lemonGPT-tag';
-    aiTagDiv.id = 'lemonGPT-tag';
+    aiTagDiv.className = 'tianliGPT-tag';
+    aiTagDiv.id = 'tianliGPT-tag';
     aiTagDiv.textContent = 'TianliGPT';
     aiTitleDiv.appendChild(aiTagDiv);
 
     const aiExplanationDiv = document.createElement('div');
-    aiExplanationDiv.className = 'lemonGPT-explanation';
+    aiExplanationDiv.className = 'tianliGPT-explanation';
     aiExplanationDiv.innerHTML = '生成中...' + '<span class="blinking-cursor"></span>';
-    aiDiv.appendChild(aiExplanationDiv); // 将 lemonGPT-explanation 插入到 aiDiv，而不是 aiTitleDiv
+    aiDiv.appendChild(aiExplanationDiv); // 将 tianliGPT-explanation 插入到 aiDiv，而不是 aiTitleDiv
 
     // 将创建的元素插入到目标元素的顶部
     targetElement.insertBefore(aiDiv, targetElement.firstChild);
   }
 
   function removeExistingAIDiv() {
-    // 查找具有 "post-lemonGPT" 类的元素
-    const existingAIDiv = document.querySelector(".post-lemonGPT");
+    // 查找具有 "post-TianliGPT" 类的元素
+    const existingAIDiv = document.querySelector(".post-TianliGPT");
 
     // 如果找到了这个元素，就从其父元素中删除它
     if (existingAIDiv) {
@@ -127,7 +127,7 @@ function tianliGPT(usePjax) {
           };
         } else {
           if (response.status === 402) {
-            document.querySelectorAll('.post-lemonGPT').forEach(el => {
+            document.querySelectorAll('.post-TianliGPT').forEach(el => {
               el.style.display = 'none';
             });
           }
@@ -150,7 +150,7 @@ function tianliGPT(usePjax) {
     },
 
     aiShowAnimation: function (text) {
-      const element = document.querySelector(".lemonGPT-explanation");
+      const element = document.querySelector(".tianliGPT-explanation");
       if (!element) {
         return;
       }
@@ -218,7 +218,7 @@ function tianliGPT(usePjax) {
           }, 200);
         }
       }, { threshold: 0 });
-      let post_ai = document.querySelector('.post-lemonGPT');
+      let post_ai = document.querySelector('.post-TianliGPT');
       observer.observe(post_ai); //启动新监听
     },
   }
@@ -231,7 +231,7 @@ function tianliGPT(usePjax) {
     tianliGPT.fetchTianliGPT(content).then(data => {
       const summary = data.summary;
       const audioId = data.audioId;
-      const buttonDiv = document.querySelector('.lemonGPT-tag');
+      const buttonDiv = document.querySelector('.tianliGPT-tag');
       buttonDiv.dataset.audioId = audioId; // 将音频的 ID 存储在按钮的 dataset 属性中
       tianliGPT.aiShowAnimation(summary);
     })
@@ -282,7 +282,7 @@ document.addEventListener('pjax:complete', function () {
 
 document.addEventListener('click', function (event) {
   const target = event.target;
-  if (target.classList.contains('lemonGPT-tag')) {
+  if (target.classList.contains('tianliGPT-tag')) {
     playAudio();
   }
 });
@@ -293,7 +293,7 @@ function playAudio() {
     audioPlayer.pause();
   } else {
     if (!audioPlayer) {
-      const buttonDiv = document.querySelector('.lemonGPT-tag');
+      const buttonDiv = document.querySelector('.tianliGPT-tag');
       const audioId = buttonDiv.dataset.audioId;
 
       if (!audioId) {
@@ -324,7 +324,7 @@ function playAudio() {
     }, 100); // 添加延迟以确保播放请求能够正常执行
   }
 
-  const buttonDiv = document.querySelector('.lemonGPT-tag');
+  const buttonDiv = document.querySelector('.tianliGPT-tag');
 
   buttonDiv.addEventListener('click', function() {
     buttonDiv.classList.toggle('playing');
@@ -350,7 +350,7 @@ function playAudio() {
 
 document.addEventListener('click', function (event) {
   const target = event.target;
-  const buttonDiv = document.querySelector('.lemonGPT-tag');
+  const buttonDiv = document.querySelector('.tianliGPT-tag');
 
   buttonDiv.addEventListener('click', function() {
     buttonDiv.classList.toggle('playing');
