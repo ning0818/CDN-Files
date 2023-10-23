@@ -112,7 +112,7 @@ function tianliGPT(usePjax) {
       }
       var url = window.location.href;
       const title = document.title;
-      const apiUrl = `https://summary.tianli0.top/?content=${encodeURIComponent(content)}&key=${encodeURIComponent(tianliGPT_key)}&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
+      const apiUrl = `https://ai.ning0818.top/?content=${encodeURIComponent(title)}${encodeURIComponent(content)}`;
       const timeout = 20000; // 设置超时时间（毫秒）
 
       try {
